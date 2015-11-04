@@ -13,13 +13,14 @@ It uses [main-bower-files](https://www.npmjs.com/package/main-bower-files), mani
 
 ## Usage
 
-Require the module and get a set of asset files by giving two paramenters: First paramenter is the non-mimified file extension,
+Require the module and get a set of asset files by giving three parameters: First parameter is the non-mimified file extension,
 like 'js' or 'css'. Second parameter (optional) is the minified file extension, like 'min.js' or 'min.css'.
+Third optional parameter is a set of options that will be passed on to The parameters are passed on to [main-bower-files](https://www.npmjs.com/package/main-bower-files#usage).
 Here is a usage with JavaScript files:
 
 ```js
 var bowerMain = require('bower-main');
-var bowerMainJavaScriptFilesObject = bowerMain('js','min.js');
+var bowerMainJavaScriptFilesObject = bowerMain('js','min.js', {includeDev: true});
 
 var normalJavaScriptFileNamesArray           = bowerMainJavaScriptFilesObject.normal;
 var minifiedJavaScriptFileNamesArray         = bowerMainJavaScriptFilesObject.minified;

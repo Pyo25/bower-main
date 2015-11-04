@@ -8,16 +8,22 @@ var mainBowerFiles = require('main-bower-files'),
  *
  * @param  {String} extension - The asset type you want, for example .js or .css
  * @param  {String} minifiedExtension - Optional: The minified asset type you want, for example .min.js, .min.js.gzip or .min.css
+ * @param  {Object} options - Optional: An object of options given to the main-bower-files module
  * @return {Object} - With the properties of type Array: 'normal', 'minified' and 'minifiedNotFound'. The last two properties is only present if function is called with both parameters.
  */
-module.exports = function (extension, minifiedExtension) {
+module.exports = function (extension, minifiedExtension, options) {
+  if (typeof minifiedExtension === 'object') {
+    options = minifiedExtension;
+    minifiedExtension = undefined;
+  }
+
   var matchExtension = new RegExp('.+\.' + extension + '$'),
     matchMinifiedExtension = new RegExp('.+\.' + minifiedExtension + '$'),
     filenameWithoutExtension = new RegExp('^(.+)\.' + extension + '$'),
     result = {},
     tmpFiles;
 
-  result.normal = mainBowerFiles()
+  result.normal = mainBowerFiles(options)
     .filter(function (filename) {
       return filename.match(matchExtension)
     });
